@@ -1,0 +1,38 @@
+#
+# A fatal error has been detected by the Java Runtime Environment:
+#
+#  SIGSEGV (0xb) at pc=0x0000000107ae8962, pid=11290, tid=22019
+#
+# JRE version: OpenJDK Runtime Environment (14.0.2+12) (build 14.0.2+12-46)
+# Java VM: OpenJDK 64-Bit Server VM (14.0.2+12-46, mixed mode, tiered, compressed oops, g1 gc, bsd-amd64)
+# Problematic frame:
+# C  [libjimage.dylib+0x1962]  ImageStrings::find(Endian*, char const*, int*, unsigned int)+0x56
+#
+# No core dump will be written. Core dumps have been disabled. To enable core dumping, try "ulimit -c unlimited" before starting Java again
+#
+# If you would like to submit a bug report, please visit:
+#   https://bugreport.java.com/bugreport/crash.jsp
+#
+
+---------------  S U M M A R Y ------------
+
+Command Line: -XX:+ShowCodeDetailsInExceptionMessages -agentlib:jdwp=transport=dt_socket,suspend=y,address=localhost:56213 -javaagent:/Users/Johan/Desktop/Eclipse.app/Contents/Eclipse/configuration/org.eclipse.osgi/631/0/.cp/lib/javaagent-shaded.jar -Dfile.encoding=UTF-8 algorithmTemplates.PushPop
+
+Host: iMac16,2 x86_64 3100 MHz, 4 cores, 8G, Darwin 19.6.0
+Time: Wed Dec 30 17:09:17 2020 EST elapsed time: 14467 seconds (0d 4h 1m 7s)
+
+---------------  T H R E A D  ---------------
+
+Current thread (0x00007fb2ca01b800):  JavaThread "Signal Dispatcher" daemon [_thread_in_vm, id=22019, stack(0x00007000097d1000,0x00007000098d1000)]
+
+Stack: [0x00007000097d1000,0x00007000098d1000],  sp=0x00007000098cf320,  free space=1016k
+Native frames: (J=compiled Java code, A=aot compiled Java code, j=interpreted, Vv=VM code, C=native code)
+C  [libjimage.dylib+0x1962]  ImageStrings::find(Endian*, char const*, int*, unsigned int)+0x56
+C  [libjimage.dylib+0x25c9]  ImageFileReader::find_location_index(char const*, unsigned long long*) const+0x3f
+C  [libjimage.dylib+0x280a]  JIMAGE_FindResource+0xcf
+V  [libjvm.dylib+0x1cd8dd]  ClassPathImageEntry::open_stream_for_loader(char const*, ClassLoaderData*, Thread*)+0x49
+V  [libjvm.dylib+0x1cfa7f]  ClassLoader::load_class(Symbol*, bool, Thread*)+0x147
+V  [libjvm.dylib+0x6b7082]  SystemDictionary::load_instance_class(Symbol*, Handle, Thread*)+0x304
+V  [libjvm.dylib+0x6b600b]  SystemDictionary::resolve_instance_class_or_null(Symbol*, Handle, Handle, Thread*)+0x559
+V  [libjvm.dylib+0x6b5703]  SystemDictionary::resolve_or_fail(Symbol*, Handle, Handle, bool, Thread*)+0x1b
+V  [libjvm.dylib+0x20ada3]
