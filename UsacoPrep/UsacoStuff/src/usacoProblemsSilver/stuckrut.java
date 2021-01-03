@@ -148,52 +148,52 @@ public class stuckrut {
 			 }
 		 }
 		 int[] blame = new int[cows.length]; 
-		 
-		 
-		 for(int i = 0; i < cows.length; i++) {
-			 try {
-			 blame[cows[i].cowStopped]+= 1 + blame[i]; 
-			 
-			 }
-			 catch(Exception e) {}; 
-		 }
-		 int c = 5;
-		 
-		 blame = transitivity(blame, cows, blame.length); 
-		
-		
-				 	
-		
-		c--;
-		 
-		 
-		 for(int i = 0; i < cows.length; i++) {
-			 System.out.println(blame[i]); 
-		 }
-		 
-		 
-		 
-		 
-		
+		 int[] size = new int[cows.length]; 
 	}
+		 
+		 
+	public static boolean connectedUnion(int[] unions, int p, int q) {
+		int i = unions[p]; 
+		int j = unions[q];
+		
+		
+		
+		while(i != unions[i] || j != unions[j]) {
+			
+			i = unions[i]; 
 	
-	static int[] transitivity(int[] blame, RutCow[] cows, int contraint) {
-		if(contraint <= 0) return blame; 
-		else {
-			for(int i = 0; i < contraint; i++) {
-				if(blame[i] != 0) {
-					try {
-						blame[cows[i].cowStopped]+= blame[i]; 
-						return transitivity(blame, cows, i); 
-					}
-					catch(Exception e) {};			
-				}
-			}
+			j = unions[j]; 
 		}
 		
-		return blame; 
-		
+		if(i == j) return true;
+		else return false; 
 	}
+			
+	static void quickUnion(int[] unions, int[] size, int p, int q)  {
+		int i = unions[p]; 
+		int j = unions[q]; 
+		
+		
+		while(i != unions[i] || j != unions[j]) {
+			unions[i] = unions[unions[i]]; 
+			unions[j] = unions[unions[j]]; 
+			i = unions[i]; 
+			j = unions[j]; 
+		}
+		
+		if(size[i] > size[j]) {
+			unions[j] = unions[i]; 
+			size[j]++; 
+		}
+		else {
+			unions[i] = unions[j]; 
+			if(size[i] == size[j]) size[j]++; 
+			
+			size[i]++; 
+		}	
+	}
+	
+	
 }
 
 class RutCow {

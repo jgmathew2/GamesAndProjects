@@ -9,9 +9,12 @@ import java.util.*;
 import java.io.*;
 
 public class cowntagion {
+
+    
+    
  	public static void main(String[] args) throws Exception {
-	    Scanner in = new Scanner(System.in);
-	    //Scanner in = new Scanner(new File("cowntagion.in"));
+	    //Scanner in = new Scanner(System.in);
+	    Scanner in = new Scanner(new File("cowntagion.in"));
 	    
 	    int numCows = in.nextInt(); 
 	    int[] fastestRoutes = new int[numCows + 1]; 
@@ -22,9 +25,12 @@ public class cowntagion {
 ;	    
 	    int[][] bridges = new int[numCows][2];
 	    
+
+	    
 	    for(int i = 0; i < bridges.length - 1; i++) {
 	    	bridges[i][0] = in.nextInt(); 
 	    	bridges[i][1] = in.nextInt(); 
+	    	Arrays.sort(bridges[i]);
 	    }
 	    
 	    int time = 0; 
@@ -33,35 +39,89 @@ public class cowntagion {
 	    while(Math.pow(2, k) < numCows) k++; 
 	    time = k; 
 	    
-	    time += numCows - 1; 
+	    
+	    //Arrays.sort(bridges);
+	    
+	    
+	    System.out.println(Arrays.toString(bridges)); 
 	    
 	    /*
-	    int beenTo = 1; 
-	    int dist = 1; 
-	    while(beenTo < numCows) {
-	    	for(int i = 0; i < bridges.length; i++) {
-	    		if(fastestRoutes[bridges[i][0]] != -1 && fastestRoutes[bridges[i][1]] == -1) {
-	    			fastestRoutes[bridges[i][1]] = dist; 
-	    			beenTo++; 
-	    		}
-	    	}
+	    int[] unions = new int[numCows]; 
+	    
+
+	    
+	    
+	    for(int i = 0; i < distance.length; i++) {
+	    	if(distance[i] != 1) distance[i] = Integer.MAX_VALUE; 
 	    	
-	    	dist++; 
+	    	unions[i] = i; 
 	    }
 	    
-	    for(int i = 0; i < fastestRoutes.length; i++) {
-	    	time += fastestRoutes[i]; 
-	    }
-	     
+	    distance[0] = 0; 
+	    
 	    */
 	    
 	    
-	    in.close();
-	
-	    int result = time;
-	
-	    System.out.println(result);
-	  
+	    
+	    
 	}
+ 	/*
+	static void quickUnion(int[] unions, int p, int q)  {
+		if(distance[p] > distance[q]) {
+ 			int away = distance[q] + 1; 
+ 			
+ 			int i = unions[p]; 
+ 			int previous = p; 
+ 			
+ 			unions[p] = q; 
+ 			distance[p] = away; 
+ 			
+ 			while(away < distance[i] && i != unions[i]) {
+ 				away++; 
+ 				int j = i; 
+ 				i = unions[j];
+ 				unions[j] = previous; 
+ 				distance[j] = away; 
+ 				previous = j;	
+ 				
+ 			}
+ 		}
+		else if(distance[p] < distance[q]) {
+ 			int away = distance[p] + 1; 
+ 			
+ 			int i = unions[q]; 
+ 			int previous = q; 
+ 			
+ 			unions[q] = p; 
+ 			distance[q] = away; 
+ 			
+ 			while(away < distance[i] && i != unions[i]) {
+ 				away++; 
+ 				int j = i; 
+ 				i = unions[j];
+ 				unions[j] = previous; 
+ 				distance[j] = away; 
+ 				previous = j;	
+ 				
+ 			}
+ 		}
+		else {
+			//TODO: Figure out how to get the bridge that q connected to to still be connected to q. 
+			unions[q] = unions[p]; 
+		}
+		/*
+		int i = unions[p]; 
+		int j = unions[q]; 
+		
+		
+		while(i != unions[i] || j != unions[j]) {
+			unions[i] = unions[unions[i]]; 
+			unions[j] = unions[unions[j]]; 
+			i = unions[i]; 
+			j = unions[j]; 
+		}	
+
+	}
+*/
 }
 
