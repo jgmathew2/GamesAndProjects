@@ -1,4 +1,4 @@
-package usacoProblemsBronze;
+package usacoProblemsSilver;
 
 /*
 ID:johangma
@@ -8,13 +8,15 @@ TASK: CLASS_NAME
 import java.util.*;
 import java.io.*;
 
-public class template {
+public class where {
  	public static void main(String[] args) throws Exception {
-	    Scanner in = new Scanner(new File("template.in"));
+	    Scanner in = new Scanner(new File("CLASS_NAME.in"));
 	    in.close();
+	    
+	    
 	
 	    int result = 0;
-	    PrintWriter out = new PrintWriter(new File("template.out")); 
+	    PrintWriter out = new PrintWriter(new File("CLASS_NAME.out")); 
 	
 	    System.out.println(result);
 	    out.println(result);
