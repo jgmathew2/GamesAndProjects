@@ -1,23 +1,27 @@
-package usacoProblemsBronze;
+package usacoProblemsSilver;
 
 /*
 ID:johangma
 LANG: JAVA
-TASK: template
+TASK: pails
  */
 import java.util.*;
 import java.io.*;
 
-public class template {
+public class pails {
  	public static void main(String[] args) throws Exception {
-	    Scanner in = new Scanner(new File("template.in"));
-	    in.close();
+	    Scanner in = new Scanner(new File("pails.in"));
+	    
 	
 	    int result = 0;
-	    PrintWriter out = new PrintWriter(new File("template.out")); 
+	    PrintWriter out = new PrintWriter(new File("pails.out")); 
 	
 	    System.out.println(result);
 	    out.println(result);
 	    out.close();
 	}
+ 	
+ 	
 }
+
+

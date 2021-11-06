@@ -12,7 +12,7 @@ import java.io.*;
 
 public class meetings {
  	public static void main(String[] args) throws Exception {
-	    Scanner in = new Scanner(new File("meetings.in"));
+ 		Scanner in = new Scanner(new File("meetings.in"));
 	    MeetingCow[] cows = new MeetingCow[in.nextInt()]; 
 	    
 	    int dest = in.nextInt(); 
@@ -26,6 +26,7 @@ public class meetings {
 	    	
 	    	totalWeight += cows[i].weight; 
 	    }
+	    
 	    in.close();
 	    
 	    Arrays.sort(cows);

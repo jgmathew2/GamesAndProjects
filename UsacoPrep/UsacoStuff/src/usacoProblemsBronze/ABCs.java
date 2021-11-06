@@ -1,42 +1,59 @@
 package usacoProblemsBronze;
+import java.util.Scanner;
 
-/*
-ID:johangma
-LANG: JAVA
-TASK: ABCs
- */
-import java.util.*;
-import java.io.*;
-
+/**
+* @author Johan
+ * @version Creation time: Apr 4, 2021 5:27:53 PM
+ * Class Description
+*/
 public class ABCs {
- 	public static void main(String[] args) {
- 		
- 		//System.out.println("hello"); 
-	    Scanner in = new Scanner(System.in);
-	    
-	    int[] values = new int[7]; 
-	    
-	    for(int i = 0; i < values.length; i++) {
-	    	values[i] = in.nextInt(); 
-	    }
-	    
-	    in.close(); 
-	  
-	    
-	    Arrays.sort(values);
-	    
-	    int a = values[0]; 
-	    int b = values[1]; 
-	    
-	    int c = 0; 
-	    
-	    if(values[2] == a + b) c = values[3];
-	    else c = values[2]; 
-
-	
-	    System.out.print(a + " ");
-	    System.out.print(b + " ");
-	    System.out.print(c);
-	   
+	public static void main(String[] args) {
+		Scanner in = new Scanner(System.in); 
+		
+		int T = in.nextInt(); 
+		
+		for(int i = 0; i < T; i++) {
+			int N = in.nextInt(); 
+			
+			int[] values = new int[N]; 
+			
+			for(int j = 0; j < N; j++) {
+				values[j] = in.nextInt(); 
+			}
+			
+			int max = values[N - 1]; 
+			
+			int triples = 0; 
+			
+			if(values.length == 4) {
+				
+			}
+			
+			if(values.length == 5) {
+				
+			}
+			
+			if(values.length == 6) {
+				
+			}
+			if(values.length == 7) {
+				
+			}
+			
+			
+			
+			System.out.println(triples); 
+			
+			
+		}
+		
+		in.close(); 
+		
+		int result = 0; 
+		
+		System.out.println(result); 
+		
+		
 	}
+
 }
