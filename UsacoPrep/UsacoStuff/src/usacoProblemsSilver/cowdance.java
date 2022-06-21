@@ -8,19 +8,37 @@ TASK: cowdance
 import java.util.*;
 import java.io.*;
 
+
+//    8/10 test cases 
 public class cowdance {
  	public static void main(String[] args) throws Exception {
 	    Scanner in = new Scanner(new File("cowdance.in"));
-	    int[] routines = new int[in.nextInt()]; 
+ 		
+ 		//Scanner in = new Scanner(System.in); 
+ 		
+	    Cow[] routines = new Cow[in.nextInt()]; 
 	    
 	    int maxTime = in.nextInt(); 
 	    
 	    for(int i = 0; i < routines.length; i++) {
-	    	routines[i] = in.nextInt(); 
+	    	routines[i] = new Cow(in.nextInt()); 
 	    }
 	    in.close();
+	    
+	    int min = 1; 
+	    int max = routines.length; 
+	    
+	    while(min + 1 < max) {
+	    	int average = (min + max) / 2; 
+	    	
+	    	if(isPossible(routines, maxTime, average)) {
+	    		max = average; 
+	    	}
+	    	else min = average; 
+	    }
+	  
 	
-	    int result = 0;
+	    int result = max;
 	    PrintWriter out = new PrintWriter(new File("cowdance.out")); 
 	
 	    System.out.println(result);
@@ -28,35 +46,91 @@ public class cowdance {
 	    out.close();
 	}
  	
- 	private static boolean inTime(int[] routines, int maxTime, int k) {
- 		int time; 
- 		int[] stage = new int[k]; 
+ 	static boolean isPossible(Cow[] routines, int maxTime, int stageSize) {
+ 		HashSet<Cow> stage = new HashSet<Cow>(); 
  		
- 		for(int i = 0; i < k; i++) {
- 			stage[i] = routines[i]; 
+ 		int i = 0; 
+ 		int totalTime = 0; 
+ 		for(int j = 0; i < stageSize; i++) {
+ 			routines[i].startTime = 0; 
+ 			
+ 			stage.add(routines[i]); 
  		}
  		
- 		for(int i = k; i < routines.length; i++) {
- 			int index = findSmallest(stage); 
+ 		boolean finished = false; 
+ 		while(!stage.isEmpty()) {
+ 			int nextCowFinished = Integer.MAX_VALUE; 
+ 			HashSet<Cow> removal = new HashSet<Cow>(); 
+ 			int lastCowFinished = Integer.MIN_VALUE; 
+ 			
+ 			for(Cow curr : stage) {
+ 				int willFinish = curr.routine - (totalTime - curr.startTime); 
+ 				lastCowFinished = Math.max(willFinish, lastCowFinished); 
+ 				if(willFinish < nextCowFinished) { 
+ 					nextCowFinished = willFinish; 
+ 					
+ 					removal.clear(); 
+ 					removal.add(curr); 
+ 						
+ 				}
+ 				else if(willFinish == nextCowFinished) removal.add(curr); 
+ 					
+ 				
+ 				
+ 			}
+ 			
+ 			
+ 			if(!finished) {
+ 				totalTime += nextCowFinished; 
+ 				if(totalTime > maxTime) return false; 
+ 			}
+ 			else {
+ 				totalTime += lastCowFinished; 
+ 				if(totalTime > maxTime) return false; 
+ 				break; 
+ 			}
+ 			
+ 			
+ 			int numRemoved = removal.size(); 
+ 			stage.removeAll(removal);
+ 		
+ 			
+ 			for(int a = 0; a < numRemoved; a++) {
+ 				try {
+	 			
+	 				routines[i].startTime = totalTime; 
+	 				stage.add(routines[i]); 
+	 				i++; 
+ 				}
+ 				catch(Exception e) { 
+ 					finished = true; 
+ 					continue; 
+ 				} 
+ 			}
+ 			
+ 			
+ 			
+ 		
+ 			
+ 			
  		}
+ 			
+ 			
+ 		
  		
  		return true; 
-
- 		
+ 			
  	}
  	
- 	private static int findSmallest(int[] array) {
- 		int smallest = array[0];
- 		int index = 0; 
+ 	static class Cow {
+ 		int routine; 
+ 		int startTime; 
  		
- 		for(int i = 1; i < array.length; i++) {
- 			if(array[i] < smallest) {
- 				index = i; 
- 				smallest = array[i]; 
- 			}
+ 		Cow(int routine) {
+ 			this.routine = routine; 
  		}
- 		
- 		return index; 
  	}
+ 
+ 	
  	
 }

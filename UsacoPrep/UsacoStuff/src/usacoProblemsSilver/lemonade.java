@@ -12,6 +12,7 @@ import java.util.*;
  * Class Description
 */
 
+//completed
 public class lemonade {
  	public static void main(String[] args) throws Exception {
 	    Scanner in = new Scanner(new File("lemonade.in"));

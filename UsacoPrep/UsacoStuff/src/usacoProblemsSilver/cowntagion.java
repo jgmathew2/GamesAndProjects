@@ -9,119 +9,75 @@ import java.util.*;
 import java.io.*;
 
 public class cowntagion {
-
-    
     
  	public static void main(String[] args) throws Exception {
-	    //Scanner in = new Scanner(System.in);
-	    Scanner in = new Scanner(new File("cowntagion.in"));
+	    Scanner in = new Scanner(System.in);
+	    //Scanner in = new Scanner(new File("cowntagion.in"));
 	    
-	    int numCows = in.nextInt(); 
-	    int[] fastestRoutes = new int[numCows + 1]; 
+	    Farm[] farms = new Farm[in.nextInt()]; 
 	    
-	    for(int i = 2; i < fastestRoutes.length; i++) {
-	    	fastestRoutes[i] = -1; 
-	    }
-;	    
-	    int[][] bridges = new int[numCows][2];
-	    
-
-	    
-	    for(int i = 0; i < bridges.length - 1; i++) {
-	    	bridges[i][0] = in.nextInt(); 
-	    	bridges[i][1] = in.nextInt(); 
-	    	Arrays.sort(bridges[i]);
+	    for(int i = 0; i < farms.length; i++) {
+	    	farms[i] = new Farm(); 
 	    }
 	    
-	    int time = 0; 
-	    int k = 0; 
-	    
-	    while(Math.pow(2, k) < numCows) k++; 
-	    time = k; 
-	    
-	    
-	    //Arrays.sort(bridges);
-	    
-	    
-	    System.out.println(Arrays.toString(bridges)); 
-	    
-	    /*
-	    int[] unions = new int[numCows]; 
-	    
-
-	    
-	    
-	    for(int i = 0; i < distance.length; i++) {
-	    	if(distance[i] != 1) distance[i] = Integer.MAX_VALUE; 
+	    for(int i = 0; i < farms.length - 1; i++) {
+	    	int a = in.nextInt() - 1; 
+	    	int b = in.nextInt() - 1; 
 	    	
-	    	unions[i] = i; 
+	    	farms[a].neighbors.add(farms[b]); 
+	    	farms[b].neighbors.add(farms[a]); 
+	    
 	    }
 	    
-	    distance[0] = 0; 
-	    
-	    */
+	    farms[0].infected++; 
 	    
 	    
+	    ArrayDeque<Farm> queue = new ArrayDeque<Farm>(); 
+	    
+	    queue.add(farms[0]); 
+	    
+	    HashSet<Farm> beenTo = new HashSet<Farm>(); 
+	    int days = 0; 
+	    
+	    while(!queue.isEmpty()) {
+	    	Farm current = queue.remove(); 
+	    	Iterator<Farm> iter = current.neighbors.iterator(); 
+	    	if(beenTo.contains(current)) continue; 
+	    	
+	    	beenTo.add(current); 
+	    	while(iter.hasNext()) {
+	    		if(iter.next().infected > 0) iter.remove(); 
+	    	}
+	    	int needed = current.neighbors.size(); 
+	    	int infected = 1; 
+	    
+	    	while(infected <= needed) {
+	    		infected *= 2; 
+	    		days++; 
+	    	}
+	    	
+	    	for(Farm neighbor : current.neighbors) {
+	    		neighbor.neighbors.remove(current); 
+	    		neighbor.infected++; 
+	    		queue.add(neighbor); 
+	    		
+	    		days++; 
+	    	}
+	    	
+	    	
+	    }
+	    
+	    System.out.println(days); 
+	    
+	
+ 	}
+ 	
+ 	static class Farm {
+ 		int infected = 0; 
+ 		
+ 		HashSet<Farm> neighbors = new HashSet<Farm>(); 
+ 	}
 	    
 	    
-	}
- 	/*
-	static void quickUnion(int[] unions, int p, int q)  {
-		if(distance[p] > distance[q]) {
- 			int away = distance[q] + 1; 
- 			
- 			int i = unions[p]; 
- 			int previous = p; 
- 			
- 			unions[p] = q; 
- 			distance[p] = away; 
- 			
- 			while(away < distance[i] && i != unions[i]) {
- 				away++; 
- 				int j = i; 
- 				i = unions[j];
- 				unions[j] = previous; 
- 				distance[j] = away; 
- 				previous = j;	
- 				
- 			}
- 		}
-		else if(distance[p] < distance[q]) {
- 			int away = distance[p] + 1; 
- 			
- 			int i = unions[q]; 
- 			int previous = q; 
- 			
- 			unions[q] = p; 
- 			distance[q] = away; 
- 			
- 			while(away < distance[i] && i != unions[i]) {
- 				away++; 
- 				int j = i; 
- 				i = unions[j];
- 				unions[j] = previous; 
- 				distance[j] = away; 
- 				previous = j;	
- 				
- 			}
- 		}
-		else {
-			//TODO: Figure out how to get the bridge that q connected to to still be connected to q. 
-			unions[q] = unions[p]; 
-		}
-		/*
-		int i = unions[p]; 
-		int j = unions[q]; 
-		
-		
-		while(i != unions[i] || j != unions[j]) {
-			unions[i] = unions[unions[i]]; 
-			unions[j] = unions[unions[j]]; 
-			i = unions[i]; 
-			j = unions[j]; 
-		}	
-
-	}
-*/
 }
 

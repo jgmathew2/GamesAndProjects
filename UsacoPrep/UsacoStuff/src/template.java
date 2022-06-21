@@ -1,4 +1,4 @@
-package usacoProblemsBronze;
+
 
 /*
 ID:johangma
